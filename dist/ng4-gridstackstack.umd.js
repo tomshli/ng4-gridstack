@@ -1,8 +1,8 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/common'], factory) :
-	(factory((global['ng4-gridstackstack'] = {}),global.core,global.common));
-}(this, (function (exports,core,common) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('gridstack'), require('jquery'), require('lodash')) :
+	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/common', 'gridstack', 'jquery', 'lodash'], factory) :
+	(factory((global['ng4-gridstackstack'] = {}),global.core,global.common,null,null,global._));
+}(this, (function (exports,core,common,gridstack,jquery,_) { 'use strict';
 
 var GridStackOptions = (function () {
     function GridStackOptions() {
@@ -204,13 +204,13 @@ var GridStackComponent = (function () {
      * @return {?}
      */
     GridStackComponent.prototype.disable = function () {
-        this.grid.disable();
+        this.grid.enableMove(false, true);
     };
     /**
      * @return {?}
      */
     GridStackComponent.prototype.enable = function () {
-        this.grid.enable();
+        this.grid.enableMove(true, true);
     };
     /**
      * @param {?} item
@@ -243,7 +243,7 @@ var GridStackComponent = (function () {
         if (this.options == null)
             this.options = new GridStackOptions();
         if (this.options.cellHeight == null)
-            this.options.cellHeight = "60px";
+            this.options.cellHeight = 60;
         if (this.options.width == null)
             this.options.width = 12;
         if (this.options.height == null)

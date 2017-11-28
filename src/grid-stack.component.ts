@@ -2,8 +2,9 @@ import { Component, HostBinding, QueryList, Input, ContentChildren, ElementRef, 
 import { GridStackOptions } from './grid-stack-options.model'
 import { GridStackItem } from './grid-stack-item.model'
 import { GridStackItemComponent } from './grid-stack-item.component'
-declare var jQuery: any;
-declare var _: any;
+import 'jquery'
+import * as _ from 'lodash'
+import 'gridstack'
 
 @Component({
     selector: 'grid-stack',
@@ -13,8 +14,8 @@ declare var _: any;
 export class GridStackComponent implements AfterContentInit {
     @Input() options: GridStackOptions = new GridStackOptions();
     @ContentChildren(GridStackItemComponent) items: QueryList<GridStackItemComponent>;
-    private gridStack: any = null;
-    private grid: any = null;
+    private gridStack: JQuery = null;
+    private grid: GridStack = null;
     constructor(private el: ElementRef, private renderer: Renderer) {
 
     }
@@ -37,11 +38,11 @@ export class GridStackComponent implements AfterContentInit {
     }
 
     disable() {
-        this.grid.disable();
+        this.grid.enableMove(false, true);
     }
 
     enable() {
-        this.grid.enable();
+        this.grid.enableMove(true, true);
     }
 
     public AddWidget(item: GridStackItemComponent) {
@@ -64,7 +65,7 @@ export class GridStackComponent implements AfterContentInit {
         if (this.options == null)
             this.options = new GridStackOptions();
         if (this.options.cellHeight == null)
-            this.options.cellHeight = "60px";
+            this.options.cellHeight = 60;
         if (this.options.width == null)
             this.options.width = 12;
         if (this.options.height == null)

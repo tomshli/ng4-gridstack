@@ -1,5 +1,8 @@
 import { Component, ContentChildren, Directive, ElementRef, EventEmitter, Injectable, Input, NgModule, Output, Pipe, Renderer, ViewChild, ViewContainerRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import 'gridstack';
+import 'jquery';
+import { each } from 'lodash';
 
 var GridStackOptions = (function () {
     function GridStackOptions() {
@@ -201,13 +204,13 @@ var GridStackComponent = (function () {
      * @return {?}
      */
     GridStackComponent.prototype.disable = function () {
-        this.grid.disable();
+        this.grid.enableMove(false, true);
     };
     /**
      * @return {?}
      */
     GridStackComponent.prototype.enable = function () {
-        this.grid.enable();
+        this.grid.enableMove(true, true);
     };
     /**
      * @param {?} item
@@ -240,7 +243,7 @@ var GridStackComponent = (function () {
         if (this.options == null)
             this.options = new GridStackOptions();
         if (this.options.cellHeight == null)
-            this.options.cellHeight = "60px";
+            this.options.cellHeight = 60;
         if (this.options.width == null)
             this.options.width = 12;
         if (this.options.height == null)
@@ -256,7 +259,7 @@ var GridStackComponent = (function () {
         this.gridStack = jQuery(nativeElement).gridstack(this.options);
         this.grid = this.gridStack.data("gridstack");
         this.gridStack.on("change", function (e, items) {
-            _.each(items, function (item) { return _this.widgetChanged(item); });
+            each(items, function (item) { return _this.widgetChanged(item); });
         });
         // Initialize widgets
         this.items.forEach(function (item) { return that.makeWidget(item); });

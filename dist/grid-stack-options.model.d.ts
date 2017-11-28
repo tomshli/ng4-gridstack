@@ -1,9 +1,10 @@
-export declare class GridStackOptions {
+import 'gridstack';
+export declare class GridStackOptions implements IGridstackOptions {
     acceptWidgets: boolean;
     alwaysShowResizeHandle: boolean;
     animate: boolean;
     auto: boolean;
-    cellHeight: string;
+    cellHeight: number;
     ddPlugin: boolean;
     disableDrag: boolean;
     disableResize: boolean;
@@ -13,7 +14,7 @@ export declare class GridStackOptions {
     height: number;
     float: boolean;
     itemClass: string;
-    minWidth: string;
+    minWidth: number;
     disableOneColumnMode: boolean;
     oneColumnModeClass: string;
     placeholderClass: string;
@@ -21,7 +22,7 @@ export declare class GridStackOptions {
     resizable: boolean;
     removable: boolean;
     removeTimeout: number;
-    rtl: string;
+    rtl: boolean | "auto";
     staticGrid: boolean;
     verticalMargin: number;
     width: number;
