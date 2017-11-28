@@ -1,5 +1,5 @@
 {
-  "name": "ng4-gridstack",
+  "name": "ng4-gridstack-src",
   "version": "0.3.40",
   "scripts": {
     "build": "gulp build",
