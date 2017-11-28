@@ -26,6 +26,10 @@
   "bugs": {
     "url": "https://github.com/ramyothman/ng4-gridstack/issues"
   },
+  "main": "dist/ng4-gridstack.umd.js",
+  "module": "dist/ng4-gridstack.js",
+  "jsnext:main": "dist/ng4-gridstack.js",
+  "typings": "dist/ng4-gridstack.d.ts",
   "devDependencies": {
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
