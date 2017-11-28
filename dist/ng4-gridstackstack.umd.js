@@ -201,6 +201,18 @@ var GridStackComponent = (function () {
         this.grid.resize(item.nativeElement, item.option.width, item.option.height);
     };
     /**
+     * @return {?}
+     */
+    GridStackComponent.prototype.disable = function () {
+        this.grid.disable();
+    };
+    /**
+     * @return {?}
+     */
+    GridStackComponent.prototype.enable = function () {
+        this.grid.enable();
+    };
+    /**
      * @param {?} item
      * @return {?}
      */
