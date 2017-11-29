@@ -102,7 +102,9 @@ var GridStackItemComponent = (function () {
         if (!this.option.visible) {
             this.renderer.setElementClass(this.nativeElement, "hidden", true);
         }
-        this.renderer.setElementAttribute(this.nativeElement, "data-item-id", this.option.itemId);
+        if (this.option.itemId) {
+            this.renderer.setElementAttribute(this.nativeElement, "data-item-id", this.option.itemId);
+        }
     };
     /**
      * @param {?} x

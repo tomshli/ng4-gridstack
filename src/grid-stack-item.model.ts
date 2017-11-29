@@ -10,11 +10,11 @@ export class GridStackItem {
     minWidth?: number | undefined;
     noResize: boolean = false;
     noMove?: boolean | undefined;
-    autoPosition: boolean = false;
-    visible: boolean = true;
+    autoPosition?: boolean = false;
+    visible?: boolean = true;
     locked?: boolean | undefined;
-    el: any;
-    itemId: string;
+    el?: any;
+    itemId?: string;
     static Clone(widget: GridStackItem) {
         var result = new GridStackItem();
 

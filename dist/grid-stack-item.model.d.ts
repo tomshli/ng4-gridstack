@@ -9,10 +9,10 @@ export declare class GridStackItem {
     minWidth?: number | undefined;
     noResize: boolean;
     noMove?: boolean | undefined;
-    autoPosition: boolean;
-    visible: boolean;
+    autoPosition?: boolean;
+    visible?: boolean;
     locked?: boolean | undefined;
-    el: any;
-    itemId: string;
+    el?: any;
+    itemId?: string;
     static Clone(widget: GridStackItem): GridStackItem;
 }
