@@ -37,12 +37,8 @@ export class GridStackComponent implements AfterContentInit {
         this.grid.resize(item.nativeElement, item.option.width, item.option.height);
     }
 
-    disable() {
-        this.grid.enableMove(false, true);
-    }
-
-    enable() {
-        this.grid.enableMove(true, true);
+    enableMove(doEnable: boolean, includeNewWidgets: boolean) {
+        this.grid.enableMove(doEnable, includeNewWidgets);
     }
 
     public AddWidget(item: GridStackItemComponent) {

@@ -13,8 +13,7 @@ export declare class GridStackComponent implements AfterContentInit {
     constructor(el: ElementRef, renderer: Renderer);
     makeWidget(item: GridStackItemComponent): void;
     updateWidget(item: GridStackItemComponent): void;
-    disable(): void;
-    enable(): void;
+    enableMove(doEnable: boolean, includeNewWidgets: boolean): void;
     AddWidget(item: GridStackItemComponent): void;
     RemoveWidget(item: GridStackItemComponent): void;
     ngAfterContentInit(): void;

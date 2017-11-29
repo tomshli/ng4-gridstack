@@ -3,16 +3,16 @@ export declare class GridStackItem {
     y: number;
     height: number;
     width: number;
-    maxHeight: number;
-    minHeight: number;
-    maxWidth: number;
-    minWidth: number;
+    maxHeight: number | undefined;
+    minHeight: number | undefined;
+    maxWidth: number | undefined;
+    minWidth: number | undefined;
     noResize: boolean;
-    noMove: boolean;
+    noMove: boolean | undefined;
     autoPosition: boolean;
-    marginWidth: string;
-    locked: boolean;
+    visible: boolean;
+    locked: boolean | undefined;
     el: any;
-    customId: string;
+    itemId: string;
     static Clone(widget: GridStackItem): GridStackItem;
 }

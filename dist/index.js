@@ -18,7 +18,7 @@ var GridStackItem = (function () {
         this.width = 1;
         this.noResize = false;
         this.autoPosition = false;
-        this.marginWidth = "10px";
+        this.visible = true;
     }
     /**
      * @param {?} widget
@@ -27,7 +27,7 @@ var GridStackItem = (function () {
     GridStackItem.Clone = function (widget) {
         var /** @type {?} */ result = new GridStackItem();
         result.autoPosition = widget.autoPosition;
-        result.customId = widget.customId;
+        result.itemId = widget.itemId;
         result.el = widget.el;
         result.height = widget.height;
         result.locked = widget.locked;
@@ -89,7 +89,6 @@ var GridStackItemComponent = (function () {
         var /** @type {?} */ renderer = this.renderer;
         if (item != null)
             this.option = item;
-        this.renderer.setElementAttribute(this.nativeElement, "style", "margin-left:" + this.option.marginWidth + ";");
         this.renderer.setElementAttribute(this.nativeElement, "data-gs-x", String(this.option.x));
         this.renderer.setElementAttribute(this.nativeElement, "data-gs-y", String(this.option.y));
         this.renderer.setElementAttribute(this.nativeElement, "data-gs-width", String(this.option.width));
@@ -100,6 +99,10 @@ var GridStackItemComponent = (function () {
         if (this.option.noResize != null && this.option.noResize == true) {
             renderer.setElementAttribute(this.nativeElement, "data-gs-no-resize", "yes");
         }
+        if (!this.option.visible) {
+            this.renderer.setElementClass(this.nativeElement, "hidden", true);
+        }
+        this.renderer.setElementAttribute(this.nativeElement, "data-item-id", this.option.itemId);
     };
     /**
      * @param {?} x
@@ -201,16 +204,12 @@ var GridStackComponent = (function () {
         this.grid.resize(item.nativeElement, item.option.width, item.option.height);
     };
     /**
+     * @param {?} doEnable
+     * @param {?} includeNewWidgets
      * @return {?}
      */
-    GridStackComponent.prototype.disable = function () {
-        this.grid.enableMove(false, true);
-    };
-    /**
-     * @return {?}
-     */
-    GridStackComponent.prototype.enable = function () {
-        this.grid.enableMove(true, true);
+    GridStackComponent.prototype.enableMove = function (doEnable, includeNewWidgets) {
+        this.grid.enableMove(doEnable, includeNewWidgets);
     };
     /**
      * @param {?} item
