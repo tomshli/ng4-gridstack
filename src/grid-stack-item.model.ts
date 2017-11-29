@@ -4,15 +4,15 @@ export class GridStackItem {
     y: number = 0;
     height: number = 1;
     width: number = 1;
-    maxHeight: number | undefined;
-    minHeight: number | undefined;
-    maxWidth: number | undefined;
-    minWidth: number | undefined;
+    maxHeight?: number | undefined;
+    minHeight?: number | undefined;
+    maxWidth?: number | undefined;
+    minWidth?: number | undefined;
     noResize: boolean = false;
-    noMove: boolean | undefined;
+    noMove?: boolean | undefined;
     autoPosition: boolean = false;
     visible: boolean = true;
-    locked: boolean | undefined;
+    locked?: boolean | undefined;
     el: any;
     itemId: string;
     static Clone(widget: GridStackItem) {
