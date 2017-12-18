@@ -50,7 +50,7 @@ export class GridStackItemComponent implements OnInit, OnDestroy, AfterViewInit 
             renderer.setElementAttribute(this.nativeElement, "data-gs-no-resize", "yes");
         }
 
-        if (!this.option.visible === false) {
+        if (this.option.visible === false) {
             this.renderer.setElementClass(this.nativeElement, "hidden", true);
         }
 
