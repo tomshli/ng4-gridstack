@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, Output, OnInit, ComponentRef, ElementRef, ViewChild, Renderer, EventEmitter, OnDestroy, AfterViewInit, ViewContainerRef } from '@angular/core';
+import { Component, HostBinding, Input, Output, OnInit, ComponentRef, ElementRef, ViewChild, Renderer2, EventEmitter, OnDestroy, AfterViewInit, ViewContainerRef } from '@angular/core';
 import { GridStackItem } from './grid-stack-item.model'
 declare var jQuery: any;
 declare var _: any;
@@ -20,7 +20,7 @@ export class GridStackItemComponent implements OnInit, OnDestroy, AfterViewInit 
     jGridRef: any = null;
     public jWidgetRef: any = null;
 
-    constructor(private el: ElementRef, private renderer: Renderer) {
+    constructor(private el: ElementRef, private renderer: Renderer2) {
         this.jWidgetRef = el.nativeElement;
     }
     get nativeElement(): HTMLElement {
@@ -38,25 +38,33 @@ export class GridStackItemComponent implements OnInit, OnDestroy, AfterViewInit 
         if (item != null)
             this.option = item;
 
-        this.renderer.setElementAttribute(this.nativeElement, "data-gs-x", String(this.option.x));
-        this.renderer.setElementAttribute(this.nativeElement, "data-gs-y", String(this.option.y));
-        this.renderer.setElementAttribute(this.nativeElement, "data-gs-width", String(this.option.width));
-        this.renderer.setElementAttribute(this.nativeElement, "data-gs-height", String(this.option.height));
+        String(this.option.x) == null ? this.renderer.removeAttribute(this.nativeElement, "data-gs-x") : this.renderer.setAttribute(this.nativeElement, "data-gs-x", String(this.option.x));
+        String(this.option.y) == null ? this.renderer.removeAttribute(this.nativeElement, "data-gs-y") : this.renderer.setAttribute(this.nativeElement, "data-gs-y", String(this.option.y));
+        String(this.option.width) == null ? this.renderer.removeAttribute(this.nativeElement, "data-gs-width") : this.renderer.setAttribute(this.nativeElement, "data-gs-width", String(this.option.width));
+        String(this.option.height) == null ? this.renderer.removeAttribute(this.nativeElement, "data-gs-height") : this.renderer.setAttribute(this.nativeElement, "data-gs-height", String(this.option.height));
+        //this.renderer.setElementAttribute(this.nativeElement, "data-gs-x", String(this.option.x));
+        //this.renderer.setElementAttribute(this.nativeElement, "data-gs-y", String(this.option.y));
+        //this.renderer.setElementAttribute(this.nativeElement, "data-gs-width", String(this.option.width));
+        //this.renderer.setElementAttribute(this.nativeElement, "data-gs-height", String(this.option.height));
 
         if (this.option.minWidth) {
-            renderer.setElementAttribute(this.nativeElement, "data-gs-min-width", String(this.option.minWidth));
+            String(this.option.minWidth) == null ? this.renderer.removeAttribute(this.nativeElement, "data-gs-min-width") : this.renderer.setAttribute(this.nativeElement, "data-gs-min-width", String(this.option.minWidth));
+            //renderer.setElementAttribute(this.nativeElement, "data-gs-min-width", String(this.option.minWidth));
         }
         if (this.option.noResize != null && this.option.noResize == true) {
-            renderer.setElementAttribute(this.nativeElement, "data-gs-no-resize", "yes");
+            "yes" == null ? this.renderer.removeAttribute(this.nativeElement, "data-gs-no-resize") : this.renderer.setAttribute(this.nativeElement, "data-gs-no-resize", "yes");
+            //renderer.setElementAttribute(this.nativeElement, "data-gs-no-resize", "yes");
         }
 
         if (this.option.visible === false) {
-            this.renderer.setElementClass(this.nativeElement, "hidden", true);
+            this.renderer.addClass(this.nativeElement, "hidden");
+            //this.renderer.setElementClass(this.nativeElement, "hidden", true);
         }
 
         if (this.option.itemId)
         {
-            this.renderer.setElementAttribute(this.nativeElement, "data-item-id", this.option.itemId);
+            this.option.itemId == null ? this.renderer.removeAttribute(this.nativeElement, "data-item-id") : this.renderer.setAttribute(this.nativeElement, "data-item-id", this.option.itemId);
+            //this.renderer.setElementAttribute(this.nativeElement, "data-item-id", this.option.itemId);
         }
     }
 

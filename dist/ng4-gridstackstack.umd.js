@@ -1,8 +1,10 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('gridstack'), require('jquery'), require('lodash')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/common', 'gridstack', 'jquery', 'lodash'], factory) :
-	(factory((global['ng4-gridstackstack'] = {}),global.core,global.common,null,null,global._));
-}(this, (function (exports,core,common,gridstack,jquery,_) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('gridstack/dist/gridstack'), require('jquery'), require('lodash')) :
+	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/common', 'gridstack/dist/gridstack', 'jquery', 'lodash'], factory) :
+	(factory((global['ng4-gridstackstack'] = {}),global.core,global.common,null,global.jqueryProxy,global._));
+}(this, (function (exports,core,common,gridstack,jqueryProxy,_) { 'use strict';
+
+var jqueryProxy__default = jqueryProxy['default'];
 
 var GridStackOptions = (function () {
     function GridStackOptions() {
@@ -86,24 +88,31 @@ var GridStackItemComponent = (function () {
      * @return {?}
      */
     GridStackItemComponent.prototype.RenderWidget = function (item) {
-        var /** @type {?} */ renderer = this.renderer;
         if (item != null)
             this.option = item;
-        this.renderer.setElementAttribute(this.nativeElement, "data-gs-x", String(this.option.x));
-        this.renderer.setElementAttribute(this.nativeElement, "data-gs-y", String(this.option.y));
-        this.renderer.setElementAttribute(this.nativeElement, "data-gs-width", String(this.option.width));
-        this.renderer.setElementAttribute(this.nativeElement, "data-gs-height", String(this.option.height));
+        String(this.option.x) == null ? this.renderer.removeAttribute(this.nativeElement, "data-gs-x") : this.renderer.setAttribute(this.nativeElement, "data-gs-x", String(this.option.x));
+        String(this.option.y) == null ? this.renderer.removeAttribute(this.nativeElement, "data-gs-y") : this.renderer.setAttribute(this.nativeElement, "data-gs-y", String(this.option.y));
+        String(this.option.width) == null ? this.renderer.removeAttribute(this.nativeElement, "data-gs-width") : this.renderer.setAttribute(this.nativeElement, "data-gs-width", String(this.option.width));
+        String(this.option.height) == null ? this.renderer.removeAttribute(this.nativeElement, "data-gs-height") : this.renderer.setAttribute(this.nativeElement, "data-gs-height", String(this.option.height));
+        //this.renderer.setElementAttribute(this.nativeElement, "data-gs-x", String(this.option.x));
+        //this.renderer.setElementAttribute(this.nativeElement, "data-gs-y", String(this.option.y));
+        //this.renderer.setElementAttribute(this.nativeElement, "data-gs-width", String(this.option.width));
+        //this.renderer.setElementAttribute(this.nativeElement, "data-gs-height", String(this.option.height));
         if (this.option.minWidth) {
-            renderer.setElementAttribute(this.nativeElement, "data-gs-min-width", String(this.option.minWidth));
+            String(this.option.minWidth) == null ? this.renderer.removeAttribute(this.nativeElement, "data-gs-min-width") : this.renderer.setAttribute(this.nativeElement, "data-gs-min-width", String(this.option.minWidth));
+            //renderer.setElementAttribute(this.nativeElement, "data-gs-min-width", String(this.option.minWidth));
         }
         if (this.option.noResize != null && this.option.noResize == true) {
-            renderer.setElementAttribute(this.nativeElement, "data-gs-no-resize", "yes");
+            this.renderer.setAttribute(this.nativeElement, "data-gs-no-resize", "yes");
+            //renderer.setElementAttribute(this.nativeElement, "data-gs-no-resize", "yes");
         }
         if (this.option.visible === false) {
-            this.renderer.setElementClass(this.nativeElement, "hidden", true);
+            this.renderer.addClass(this.nativeElement, "hidden");
+            //this.renderer.setElementClass(this.nativeElement, "hidden", true);
         }
         if (this.option.itemId) {
-            this.renderer.setElementAttribute(this.nativeElement, "data-item-id", this.option.itemId);
+            this.option.itemId == null ? this.renderer.removeAttribute(this.nativeElement, "data-item-id") : this.renderer.setAttribute(this.nativeElement, "data-item-id", this.option.itemId);
+            //this.renderer.setElementAttribute(this.nativeElement, "data-item-id", this.option.itemId);
         }
     };
     /**
@@ -160,7 +169,7 @@ GridStackItemComponent.decorators = [
  */
 GridStackItemComponent.ctorParameters = function () { return [
     { type: core.ElementRef, },
-    { type: core.Renderer, },
+    { type: core.Renderer2, },
 ]; };
 GridStackItemComponent.propDecorators = {
     'contentPlaceholder': [{ type: core.ViewChild, args: ["contentPlaceholder", { read: core.ViewContainerRef },] },],
@@ -169,6 +178,7 @@ GridStackItemComponent.propDecorators = {
     'onGridConfigurationChanged': [{ type: core.Output },],
 };
 
+var jquery = jqueryProxy__default || jqueryProxy;
 var GridStackComponent = (function () {
     /**
      * @param {?} el
@@ -255,9 +265,11 @@ var GridStackComponent = (function () {
             this.options.float = false;
         if (this.options.resizable == null)
             this.options.resizable = true;
-        this.renderer.setElementAttribute(nativeElement, "data-gs-width", String(this.options.width));
-        this.renderer.setElementAttribute(nativeElement, "data-gs-height", String(this.options.height));
-        this.gridStack = jQuery(nativeElement).gridstack(this.options);
+        String(this.options.width) == null ? this.renderer.removeAttribute(nativeElement, "data-gs-width") : this.renderer.setAttribute(nativeElement, "data-gs-width", String(this.options.width));
+        String(this.options.height) == null ? this.renderer.removeAttribute(nativeElement, "data-gs-height") : this.renderer.setAttribute(nativeElement, "data-gs-height", String(this.options.height));
+        //this.renderer.setElementAttribute(nativeElement, "data-gs-width", String(this.options.width));
+        //this.renderer.setElementAttribute(nativeElement, "data-gs-height", String(this.options.height));
+        this.gridStack = jquery(nativeElement).gridstack(this.options);
         this.grid = this.gridStack.data("gridstack");
         this.gridStack.on("change", function (e, items) {
             _.each(items, function (item) { return _this.widgetChanged(item); });
@@ -293,7 +305,7 @@ GridStackComponent.decorators = [
  */
 GridStackComponent.ctorParameters = function () { return [
     { type: core.ElementRef, },
-    { type: core.Renderer, },
+    { type: core.Renderer2, },
 ]; };
 GridStackComponent.propDecorators = {
     'options': [{ type: core.Input },],

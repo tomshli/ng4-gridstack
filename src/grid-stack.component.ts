@@ -1,10 +1,12 @@
-import { Component, HostBinding, QueryList, Input, ContentChildren, ElementRef, Renderer, AfterContentInit } from '@angular/core';
+import { Component, HostBinding, QueryList, Input, ContentChildren, ElementRef, Renderer2, AfterContentInit } from '@angular/core';
 import { GridStackOptions } from './grid-stack-options.model'
 import { GridStackItem } from './grid-stack-item.model'
 import { GridStackItemComponent } from './grid-stack-item.component'
-import 'jquery'
-import * as _ from 'lodash'
-import 'gridstack'
+import * as jqueryProxy from 'jquery';
+import * as _ from 'lodash';
+import 'gridstack/dist/gridstack';
+
+const jquery: JQueryStatic = (<any>jqueryProxy).default || jqueryProxy
 
 @Component({
     selector: 'grid-stack',
@@ -16,7 +18,7 @@ export class GridStackComponent implements AfterContentInit {
     @ContentChildren(GridStackItemComponent) items: QueryList<GridStackItemComponent>;
     private gridStack: JQuery = null;
     private grid: GridStack = null;
-    constructor(private el: ElementRef, private renderer: Renderer) {
+    constructor(private el: ElementRef, private renderer: Renderer2) {
 
     }
 
@@ -72,10 +74,12 @@ export class GridStackComponent implements AfterContentInit {
             this.options.float = false;
         if (this.options.resizable == null)
             this.options.resizable = true;
-        this.renderer.setElementAttribute(nativeElement, "data-gs-width", String(this.options.width));
-        this.renderer.setElementAttribute(nativeElement, "data-gs-height", String(this.options.height));
+        String(this.options.width) == null ? this.renderer.removeAttribute(nativeElement, "data-gs-width") : this.renderer.setAttribute(nativeElement, "data-gs-width", String(this.options.width));
+        String(this.options.height) == null ? this.renderer.removeAttribute(nativeElement, "data-gs-height") : this.renderer.setAttribute(nativeElement, "data-gs-height", String(this.options.height));
+        //this.renderer.setElementAttribute(nativeElement, "data-gs-width", String(this.options.width));
+        //this.renderer.setElementAttribute(nativeElement, "data-gs-height", String(this.options.height));
 
-        this.gridStack = jQuery(nativeElement).gridstack(this.options);
+        this.gridStack = jquery(nativeElement).gridstack(this.options);
         this.grid = this.gridStack.data("gridstack");
 
         this.gridStack.on("change", (e: any, items: any) => {
