@@ -1,5 +1,5 @@
 
-import 'gridstack/dist/gridstack'
+import 'gridstack'
 
 export class GridStackOptions implements GridStackOptions {
     acceptWidgets: boolean;

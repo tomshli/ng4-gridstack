@@ -4,7 +4,7 @@ import { GridStackItem } from './grid-stack-item.model'
 import { GridStackItemComponent } from './grid-stack-item.component'
 import * as jqueryProxy from 'jquery';
 import * as _ from 'lodash';
-import 'gridstack/dist/gridstack';
+import 'gridstack';
 
 const jquery: JQueryStatic = (<any>jqueryProxy).default || jqueryProxy
 
