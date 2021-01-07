@@ -1,10 +1,13 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
+    "downlevelIteration": true,
     "experimentalDecorators": true,
+    "importHelpers": true,
+    "module": "esnext",
     "moduleResolution": "node",
     "rootDir": "./src",
-    "target": "es5",
+    "target": "es2015",
     "lib": [
       "es2016",
       "dom"
