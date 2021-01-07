@@ -18,11 +18,12 @@
     "types": []
   },
   "angularCompilerOptions": {
-    "annotateForClosureCompiler": true,
+    "annotateForClosureCompiler": false,
     "strictMetadataEmit": true,
     "skipTemplateCodegen": true,
     "flatModuleOutFile": "ng4-gridstack.js",
-    "flatModuleId": "ng4-gridstack"
+    "flatModuleId": "ng4-gridstack",
+    "enableIvy": false
   },
   "files": [
     "./index.ts"
